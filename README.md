@@ -1,13 +1,13 @@
 # Abdul Sameer Studio
 
-A responsive, accessible demo website for Abdul Sameer Studio, built with vanilla
-HTML, CSS, and JavaScript. It is deployed to
+A responsive, accessible photography website for Abdul Sameer Studio, built
+with semantic HTML, locally compiled CSS, and vanilla JavaScript. It is deployed to
 [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/)
 at [abdulsameerstudio.ca](https://abdulsameerstudio.ca).
 
 The demo is intentionally excluded from search indexing until the final business
-content is ready. It has no form, CMS, database, analytics, cookies, external
-font, or third-party browser script.
+content is ready. It has no form, CMS, database, analytics, cookies, or
+third-party browser request. Fonts and portfolio photographs are self-hosted.
 
 `robots.txt` allows crawlers to fetch the demo so they can observe the
 `X-Robots-Tag` header and HTML robots metadata that enforce `noindex`. Blocking
@@ -18,7 +18,10 @@ leave a URL-only search result.
 
 - Vite builds the root `index.html` and `404.html` into `dist/` and fingerprints
   JavaScript and CSS under `dist/assets/`.
-- `src/` contains the local styles, JavaScript, and visual assets.
+- `src/` contains the local styles, JavaScript, self-hosted fonts, and optimized
+  photo derivatives.
+- Tailwind and PostCSS run only during the local/CI build. No Tailwind CDN or
+  runtime dependency is delivered to visitors.
 - `public/` contains static files copied unchanged into `dist/`, including
   `robots.txt`, the favicon, and Cloudflare's `_headers` configuration.
 - `tests/` contains browser, link, and accessibility coverage.
@@ -52,6 +55,7 @@ system libraries are not already installed.
 | `npm run format`            | Format supported source files                          |
 | `npm run format:check`      | Verify formatting without changing files               |
 | `npm run lint`              | Run HTML, CSS, and JavaScript static analysis          |
+| `npm run images:optimize`   | Rebuild stripped WebP derivatives from local originals |
 | `npm run test`              | Run the Playwright browser test suite                  |
 | `npm run check`             | Run every quality gate, including the production build |
 | `npm run deploy:cloudflare` | Deploy `dist/` with the pinned Wrangler version        |
@@ -64,6 +68,42 @@ npm ci
 npm exec -- playwright install chromium
 npm run check
 ```
+
+## Photo asset workflow
+
+The full-resolution source photographs are intentionally excluded from Git.
+They are much larger than a website needs, may contain camera metadata, and
+should not become permanent objects in a public repository.
+
+The default local source directory is
+`website-20260727T172328Z-1-001/website`. To rebuild the web assets from that
+folder:
+
+```bash
+npm run images:optimize
+```
+
+To use another extracted source directory:
+
+```bash
+npm run images:optimize -- /absolute/path/to/website
+```
+
+The optimizer auto-orients each JPEG, strips EXIF and embedded profiles, and
+creates:
+
+- responsive WebP variants for the six featured hero, service, and about photographs;
+- a 760-pixel thumbnail and a 2200-pixel lightbox image for each of the 48
+  portfolio photographs.
+
+Only the generated files under `src/assets/photos/` are committed. Vite gives
+them content-hashed production names, and the build tests enforce Cloudflare's
+25 MiB per-file limit plus a 25 MiB total asset budget.
+
+Before publishing new photographs—especially photographs of children—confirm
+that the studio has the necessary copyright, model, and parental permissions.
+The locally bundled font notices are documented in
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 
 ## Credential setup
 

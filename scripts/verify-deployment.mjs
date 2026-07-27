@@ -1,5 +1,6 @@
 const DEFAULT_SITE_URL = "https://abdulsameerstudio.ca/";
 const SITE_MARKER = /data-site=["']abdul-sameer-studio["']/i;
+const RELEASE_MARKER = /data-release=["']portfolio["']/i;
 const NOT_FOUND_MARKER = /data-page=["']not-found["']/i;
 
 const attempts = readPositiveInteger("DEPLOYMENT_VERIFY_ATTEMPTS", 20);
@@ -67,6 +68,7 @@ async function checkHome() {
 
   const html = await response.text();
   assert(SITE_MARKER.test(html), "home page marker is missing");
+  assert(RELEASE_MARKER.test(html), "portfolio release marker is missing");
   assert(hasNoindexMeta(html), "home page robots meta does not include noindex");
 
   assertHeaderIncludes(response, "x-frame-options", "deny");

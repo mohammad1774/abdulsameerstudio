@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const homeSections = ["#work", "#services", "#about", "#contact"];
+const homeSections = ["#services", "#portfolio", "#about", "#testimonials", "#booking"];
 
 test.describe("home page", () => {
   test.beforeEach(async ({ page }) => {
@@ -10,9 +10,10 @@ test.describe("home page", () => {
 
   test("has the expected semantic structure and launch metadata", async ({ page }) => {
     await expect(page.locator('body[data-site="abdul-sameer-studio"]')).toBeVisible();
+    await expect(page.locator('body[data-release="portfolio"]')).toBeVisible();
     await expect(page.locator("main#main-content")).toBeVisible();
     await expect(page.locator("h1")).toHaveCount(1);
-    await expect(page.locator("footer")).toBeVisible();
+    await expect(page.getByRole("contentinfo")).toBeVisible();
     await expect(page).toHaveTitle(/Abdul Sameer Studio/i);
 
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -26,6 +27,21 @@ test.describe("home page", () => {
       "content",
       "https://abdulsameerstudio.ca/",
     );
+    await expect(page.locator("img[srcset]")).toHaveCount(6);
+    await expect(page.locator("img[srcset][sizes]")).toHaveCount(6);
+
+    const headerHasStableContrast = await page.locator("[data-site-header]").evaluate((header) => {
+      const components = window
+        .getComputedStyle(header)
+        .backgroundColor.match(/[\d.]+/g)
+        ?.map(Number);
+
+      return Boolean(
+        components &&
+        (components.length === 3 || (components.length >= 4 && components[3] >= 0.85)),
+      );
+    });
+    expect(headerHasStableContrast).toBe(true);
 
     for (const section of homeSections) {
       await expect(page.locator(section)).toHaveCount(1);
@@ -57,6 +73,17 @@ test.describe("home page", () => {
 
     const response = await page.goto("/");
     await page.waitForLoadState("networkidle");
+
+    const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+    const viewportHeight = page.viewportSize()?.height ?? 800;
+    for (let offset = 0; offset < pageHeight; offset += viewportHeight) {
+      await page.evaluate((nextOffset) => window.scrollTo(0, nextOffset), offset);
+      await page.waitForTimeout(25);
+    }
+    await page.waitForFunction(() =>
+      [...document.images].every((image) => image.complete && image.naturalWidth > 0),
+    );
+    await page.evaluate(() => window.scrollTo(0, 0));
 
     expect(response?.ok()).toBe(true);
     expect(browserErrors).toEqual([]);
@@ -119,20 +146,121 @@ test.describe("mobile navigation", () => {
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
     await expect(navigation).toHaveAttribute("data-open", "");
+    await expect(page.locator("main")).toHaveAttribute("inert", "");
+    await expect(navigation.locator("a[href]").first()).toBeFocused();
+
+    const openMenuAccessibility = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(openMenuAccessibility.violations).toEqual([]);
+
+    await page.keyboard.press("Shift+Tab");
+    await expect(toggle).toBeFocused();
+    await page.keyboard.press("Shift+Tab");
+    await expect(navigation.locator("a[href]").last()).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(toggle).toBeFocused();
 
     await page.keyboard.press("Escape");
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect(toggle).toBeFocused();
+    await expect(page.locator("main")).not.toHaveAttribute("inert", "");
 
     await toggle.click();
-    await navigation.locator('a[href="#work"]').click();
+    await navigation.locator('a[href="#portfolio"]').click();
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
-    await expect(page.locator("#work")).toBeInViewport();
+    await expect(page.locator("#portfolio")).toBeInViewport();
 
     const hasHorizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth > window.innerWidth + 1,
     );
     expect(hasHorizontalOverflow).toBe(false);
+  });
+});
+
+test.describe("portfolio gallery", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("#gallery")).toHaveAttribute("aria-busy", "false");
+  });
+
+  test("filters all supplied photographs without leaving the page", async ({ page }) => {
+    const expectedCategoryCounts = {
+      all: 48,
+      portrait: 10,
+      wedding: 12,
+      event: 6,
+      newborn: 11,
+      corporate: 9,
+    };
+
+    for (const [filter, expectedCount] of Object.entries(expectedCategoryCounts)) {
+      const filterButton = page.locator(`.gallery-filter[data-filter="${filter}"]`);
+      await filterButton.click();
+
+      await expect(filterButton).toHaveAttribute("aria-pressed", "true");
+      await expect(page.locator(".gallery-item")).toHaveCount(expectedCount);
+
+      const noun = expectedCount === 1 ? "photograph" : "photographs";
+      await expect(page.locator("#gallery-status")).toHaveText(`${expectedCount} ${noun} shown`);
+    }
+  });
+
+  test("reserves the correct layout space for every gallery image", async ({ page }) => {
+    const galleryImages = page.locator(".gallery-image");
+    await expect(galleryImages).toHaveCount(48);
+
+    const invalidDimensions = await galleryImages.evaluateAll((images) =>
+      images
+        .map((image) => ({
+          source: image.getAttribute("src"),
+          width: image.getAttribute("width"),
+          height: image.getAttribute("height"),
+        }))
+        .filter(({ width, height }) => Number(width) <= 0 || Number(height) <= 0),
+    );
+
+    expect(invalidDimensions).toEqual([]);
+
+    const misalignedTiles = await page.locator(".gallery-item").evaluateAll((items) =>
+      items
+        .map((item) => {
+          const image = item.querySelector("img");
+          return {
+            itemHeight: item.getBoundingClientRect().height,
+            imageHeight: image?.getBoundingClientRect().height ?? 0,
+          };
+        })
+        .filter(({ itemHeight, imageHeight }) => Math.abs(itemHeight - imageHeight) > 1),
+    );
+
+    expect(misalignedTiles).toEqual([]);
+  });
+
+  test("opens an accessible keyboard-operated lightbox and restores focus", async ({ page }) => {
+    const firstPhoto = page.locator(".gallery-item").first();
+    const dialog = page.locator("#lightbox");
+
+    await firstPhoto.click();
+    await expect(dialog).toBeVisible();
+    await expect(page.locator("[data-lightbox-close]")).toBeFocused();
+    await expect(page.locator("[data-lightbox-image]")).toHaveJSProperty("complete", true);
+    await expect
+      .poll(() => page.locator("[data-lightbox-image]").evaluate((image) => image.naturalWidth))
+      .toBeGreaterThan(0);
+
+    const openLightboxAccessibility = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(openLightboxAccessibility.violations).toEqual([]);
+
+    const firstCaption = await page.locator("[data-lightbox-caption]").textContent();
+    await page.keyboard.press("ArrowRight");
+    await expect(page.locator("[data-lightbox-caption]")).not.toHaveText(firstCaption ?? "");
+
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(firstPhoto).toBeFocused();
   });
 });
 

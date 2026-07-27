@@ -17,6 +17,22 @@ for (const pageUnderTest of ["/", "/404.html"]) {
       expect(link.href, `Empty link on "${link.text}"`).toBeTruthy();
 
       const url = new URL(link.href, page.url());
+
+      if (url.protocol === "mailto:") {
+        expect(url.pathname, `Unexpected email link on "${link.text}"`).toBe(
+          "abdulsameerstudio@gmail.com",
+        );
+        continue;
+      }
+
+      if (url.protocol === "tel:") {
+        expect(url.pathname, `Unexpected telephone link on "${link.text}"`).toBe("+13432548524");
+        continue;
+      }
+
+      expect(["http:", "https:"], `Unsupported link protocol on "${link.text}"`).toContain(
+        url.protocol,
+      );
       expect(url.origin, `External link on "${link.text}"`).toBe(new URL(page.url()).origin);
 
       if (url.hash && url.pathname === new URL(page.url()).pathname) {
