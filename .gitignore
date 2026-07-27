@@ -3,6 +3,7 @@ node_modules/
 
 # Generated site and test output
 dist/
+src/assets/.photos-optimized/
 playwright-report/
 test-results/
 coverage/
@@ -28,3 +29,11 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Local source drops (optimized derivatives are committed from src/assets/photos)
+index_test.html
+index_test.html:Zone.Identifier
+website-20260727T172328Z-1-001/
+website-20260727T172328Z-1-001.zip
+website-20260727T172328Z-1-001.zip:Zone.Identifier
+*:Zone.Identifier

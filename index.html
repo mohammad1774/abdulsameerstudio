@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#12110f" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#fafaf7" />
     <meta
       name="description"
-      content="A cinematic preview of Abdul Sameer Studio, a photography studio focused on honest portraits, celebrations, and brand stories."
+      content="Professional photography in Ottawa, Ontario for portraits, weddings, events, newborns, and corporate clients."
     />
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <link rel="canonical" href="https://abdulsameerstudio.ca/" />
@@ -17,36 +17,41 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_CA" />
     <meta property="og:site_name" content="Abdul Sameer Studio" />
-    <meta property="og:title" content="Abdul Sameer Studio — Stories held in light" />
+    <meta property="og:title" content="Abdul Sameer Studio Photography | Ottawa, Ontario" />
     <meta
       property="og:description"
-      content="A cinematic photography studio preview for portraits, celebrations, and brand stories."
+      content="Portrait, wedding, event, newborn, and corporate photography in Ottawa, Ontario."
     />
     <meta property="og:url" content="https://abdulsameerstudio.ca/" />
     <meta property="og:image" content="https://abdulsameerstudio.ca/og-card.svg" />
     <meta property="og:image:alt" content="Abdul Sameer Studio wordmark on a dark background" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Abdul Sameer Studio — Stories held in light" />
+    <meta name="twitter:title" content="Abdul Sameer Studio Photography | Ottawa, Ontario" />
     <meta
       name="twitter:description"
-      content="A cinematic photography studio preview for portraits, celebrations, and brand stories."
+      content="Portrait, wedding, event, newborn, and corporate photography in Ottawa, Ontario."
     />
     <meta name="twitter:image" content="https://abdulsameerstudio.ca/og-card.svg" />
 
-    <title>Abdul Sameer Studio — Stories held in light</title>
+    <title>Abdul Sameer Studio Photography | Ottawa, Ontario</title>
     <script type="module" src="/src/scripts/main.js"></script>
   </head>
-  <body data-site="abdul-sameer-studio">
+  <body data-site="abdul-sameer-studio" data-release="portfolio" class="bg-ivory text-ink">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <header class="site-header">
-      <a class="wordmark" href="/" aria-label="Abdul Sameer Studio home">
-        <span class="wordmark-mark" aria-hidden="true">AS</span>
-        <span class="wordmark-text">Abdul Sameer <span>Studio</span></span>
+    <header
+      class="site-header fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-12 lg:px-20"
+      data-site-header
+    >
+      <a class="wordmark group" href="#hero" aria-label="Abdul Sameer Studio home">
+        <span class="wordmark-text block font-display text-xl font-light tracking-widest">
+          AbdulSameerStudio
+        </span>
+        <span class="eyebrow block text-gold">Photography · Ottawa</span>
       </a>
 
       <button
-        class="nav-toggle"
+        class="nav-toggle lg:hidden"
         type="button"
         aria-expanded="false"
         aria-controls="primary-navigation"
@@ -56,175 +61,696 @@
         <span class="nav-toggle-line" aria-hidden="true"></span>
       </button>
 
-      <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
-        <a href="#work">Work</a>
+      <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation" data-navigation>
         <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#testimonials">Testimonials</a>
+        <a class="button button-solid" href="#booking">Book a session</a>
       </nav>
     </header>
 
     <main id="main-content" tabindex="-1">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">Photography with feeling</p>
-          <h1 id="hero-title">Stories held<br />in light.</h1>
-          <p class="hero-intro">
-            Honest photographs shaped by atmosphere, connection, and the moments that deserve to
-            outlive the day.
-          </p>
-          <a class="text-link" href="#work">
-            Explore the preview
-            <span aria-hidden="true">↘</span>
-          </a>
-        </div>
-
-        <figure class="hero-frame">
+      <section
+        class="hero relative isolate flex min-h-screen items-end overflow-hidden bg-ivory"
+        id="hero"
+        aria-labelledby="hero-title"
+      >
+        <div class="hero-media absolute inset-0 -z-10" aria-hidden="true">
           <img
-            src="/src/assets/hero-frame.svg"
-            width="960"
-            height="1200"
-            alt="Abstract silhouette in warm studio light"
+            class="hero-image h-full w-full object-cover"
+            src="/src/assets/photos/featured/hero.webp"
+            srcset="
+              /src/assets/photos/featured/hero-960.webp   960w,
+              /src/assets/photos/featured/hero-1600.webp 1600w,
+              /src/assets/photos/featured/hero.webp      2400w
+            "
+            sizes="100vw"
+            width="2400"
+            height="1600"
+            alt=""
+            fetchpriority="high"
           />
-          <figcaption>
-            <span>Study No. 01</span>
-            <span>Light &amp; form</span>
-          </figcaption>
-        </figure>
+          <div class="hero-overlay absolute inset-0"></div>
+        </div>
 
-        <p class="hero-note" aria-hidden="true">Portraits · Celebrations · Stories</p>
-      </section>
-
-      <section class="section work-section" id="work" aria-labelledby="work-title">
-        <div class="section-heading">
-          <p class="eyebrow">Selected direction</p>
-          <h2 id="work-title">A place for the photographs you will keep.</h2>
-          <p class="section-intro">
-            This first edition is a visual preview. Original studio work and complete galleries will
-            take their place here soon.
+        <div class="page-shell w-full pb-16 pt-40 md:pb-20">
+          <p class="eyebrow mb-5 text-gold">Ottawa, Ontario · Est. 2016</p>
+          <div class="hero-layout grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+            <div>
+              <h1
+                class="hero-title font-display font-light leading-none tracking-tight"
+                id="hero-title"
+              >
+                Capturing <em>life’s most</em> beautiful
+                <span class="text-gold">moments</span>
+              </h1>
+              <p class="hero-intro mt-7 max-w-2xl font-sans text-sm text-muted">
+                Portrait · Weddings · Events · Newborn · Corporate
+              </p>
+            </div>
+            <div class="hero-actions flex flex-wrap gap-3 lg:flex-col lg:items-end">
+              <a class="button button-outline" href="#portfolio">View portfolio</a>
+              <a class="button button-solid" href="#booking">Book a session</a>
+            </div>
+          </div>
+          <p
+            class="scroll-cue mt-12 text-center text-xs uppercase tracking-widest"
+            aria-hidden="true"
+          >
+            Scroll to explore
           </p>
         </div>
+      </section>
 
-        <div class="work-grid">
-          <figure class="work-card work-card-tall">
-            <div class="image-wrap">
+      <div class="service-marquee overflow-hidden border-y border-stone" aria-hidden="true">
+        <p class="service-marquee-track whitespace-nowrap py-5 text-center">
+          Portrait Sessions · Wedding Photography · Newborn Sessions · Corporate Events · Event
+          Photography · Ottawa, Ontario, Canada
+        </p>
+      </div>
+
+      <section
+        class="section services-section py-24 md:py-32"
+        id="services"
+        aria-labelledby="services-title"
+      >
+        <div class="page-shell">
+          <div class="section-heading mb-16">
+            <p class="eyebrow mb-4 text-gold">What I offer</p>
+            <div class="flex flex-wrap items-end justify-between gap-8">
+              <h2 class="section-title font-display font-light leading-tight" id="services-title">
+                Services &amp; <em>specialties</em>
+              </h2>
+              <a class="button button-outline" href="#booking">Enquire now</a>
+            </div>
+          </div>
+
+          <article
+            class="service-row grid items-center gap-12 border-t border-stone py-16 md:grid-cols-2 md:gap-20"
+          >
+            <figure class="service-media overflow-hidden">
               <img
-                src="/src/assets/portrait-frame.svg"
-                width="800"
-                height="1060"
-                alt="Abstract portrait study in amber and charcoal"
+                class="h-full w-full object-cover"
+                src="/src/assets/photos/featured/wedding.webp"
+                srcset="
+                  /src/assets/photos/featured/wedding-720.webp   720w,
+                  /src/assets/photos/featured/wedding-1200.webp 1200w,
+                  /src/assets/photos/featured/wedding.webp      1800w
+                "
+                sizes="(min-width: 768px) 45vw, calc(100vw - 3rem)"
+                width="1800"
+                height="2700"
+                alt="Wedding couple sitting together in a meadow"
                 loading="lazy"
               />
-              <span class="image-number" aria-hidden="true">01</span>
+            </figure>
+            <div class="service-copy">
+              <p class="eyebrow mb-3 text-gold">Service one</p>
+              <h3 class="font-display text-4xl font-light">Weddings + Engagements</h3>
+              <p class="mt-6 text-sm leading-relaxed text-muted">
+                We understand that your wedding and engagement are once-in-a-lifetime moments filled
+                with love, joy, and treasured memories.
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">
+                We’re passionate about capturing the essence of your unique love story and turning
+                it into a timeless collection of photographs. From your initial engagement to your
+                eagerly anticipated wedding day, we are committed to preserving every precious
+                moment along the way.
+              </p>
+              <div class="mt-8 flex flex-wrap items-center gap-6">
+                <a class="button button-outline" href="#booking">More details</a>
+                <p class="font-display text-2xl font-light text-muted">Starting at $1,900</p>
+              </div>
             </div>
-            <figcaption>
-              <span>Portraits</span>
-              <span>Quietly expressive</span>
-            </figcaption>
-          </figure>
+          </article>
 
-          <figure class="work-card">
-            <div class="image-wrap">
+          <article
+            class="service-row grid items-center gap-12 border-t border-stone py-16 md:grid-cols-2 md:gap-20"
+          >
+            <figure class="service-media overflow-hidden md:order-2">
               <img
-                src="/src/assets/celebration-frame.svg"
-                width="960"
-                height="760"
-                alt="Abstract celebration scene with soft golden light"
+                class="h-full w-full object-cover"
+                src="/src/assets/photos/featured/portrait.webp"
+                srcset="
+                  /src/assets/photos/featured/portrait-720.webp   720w,
+                  /src/assets/photos/featured/portrait-1200.webp 1200w,
+                  /src/assets/photos/featured/portrait.webp      1800w
+                "
+                sizes="(min-width: 768px) 45vw, calc(100vw - 3rem)"
+                width="1800"
+                height="2589"
+                alt="Outdoor portrait session"
                 loading="lazy"
               />
-              <span class="image-number" aria-hidden="true">02</span>
+            </figure>
+            <div class="service-copy md:order-1">
+              <p class="eyebrow mb-3 text-gold">Service two</p>
+              <h3 class="font-display text-4xl font-light">Portraits + Headshots</h3>
+              <p class="mt-6 text-sm leading-relaxed text-muted">
+                We specialize in helping you capture the essence of your personality and story
+                through our portrait and headshot photography services.
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">
+                Whether you’re a corporate professional looking to elevate your professional image
+                or a family seeking memorable portraits to treasure for a lifetime, we’re dedicated
+                to delivering stunning, high-quality, professional images that truly speak to who
+                you are.
+              </p>
+              <div class="mt-8 flex flex-wrap items-center gap-6">
+                <a class="button button-outline" href="#booking">More details</a>
+                <p class="font-display text-2xl font-light text-muted">Starting at $200</p>
+              </div>
             </div>
-            <figcaption>
-              <span>Celebrations</span>
-              <span>Unscripted connection</span>
-            </figcaption>
-          </figure>
+          </article>
 
-          <figure class="work-card">
-            <div class="image-wrap">
+          <article
+            class="service-row grid items-center gap-12 border-t border-stone py-16 md:grid-cols-2 md:gap-20"
+          >
+            <figure class="service-media overflow-hidden">
               <img
-                src="/src/assets/brand-frame.svg"
-                width="960"
-                height="760"
-                alt="Abstract editorial still life in deep red and warm ivory"
+                class="h-full w-full object-cover"
+                src="/src/assets/photos/featured/newborn.webp"
+                srcset="
+                  /src/assets/photos/featured/newborn-720.webp   720w,
+                  /src/assets/photos/featured/newborn-1200.webp 1200w,
+                  /src/assets/photos/featured/newborn.webp      1800w
+                "
+                sizes="(min-width: 768px) 45vw, calc(100vw - 3rem)"
+                width="1800"
+                height="2343"
+                alt="Newborn photography session"
                 loading="lazy"
               />
-              <span class="image-number" aria-hidden="true">03</span>
+            </figure>
+            <div class="service-copy">
+              <p class="eyebrow mb-3 text-gold">Service three</p>
+              <h3 class="font-display text-4xl font-light">Newborn Sessions</h3>
+              <p class="mt-6 text-sm leading-relaxed text-muted">
+                The first weeks of a baby’s life are incredibly fleeting—each tiny curl of the
+                fingers and every delicate expression deserves to be preserved forever.
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">
+                Our gentle, patient approach ensures a safe and relaxed session for your newest
+                family member. We offer both posed studio and natural lifestyle options, ideally
+                captured within the first 14 days of arrival.
+              </p>
+              <div class="mt-8 flex flex-wrap items-center gap-6">
+                <a class="button button-outline" href="#booking">More details</a>
+                <p class="font-display text-2xl font-light text-muted">Starting at $200</p>
+              </div>
             </div>
-            <figcaption>
-              <span>Brand stories</span>
-              <span>Purposeful character</span>
-            </figcaption>
-          </figure>
+          </article>
+
+          <article
+            class="service-row grid items-center gap-12 border-y border-stone py-16 md:grid-cols-2 md:gap-20"
+          >
+            <figure class="service-media overflow-hidden md:order-2">
+              <img
+                class="h-full w-full object-cover"
+                src="/src/assets/photos/featured/corporate.webp"
+                srcset="
+                  /src/assets/photos/featured/corporate-720.webp   720w,
+                  /src/assets/photos/featured/corporate-1200.webp 1200w,
+                  /src/assets/photos/featured/corporate.webp      1800w
+                "
+                sizes="(min-width: 768px) 45vw, calc(100vw - 3rem)"
+                width="1800"
+                height="2700"
+                alt="Corporate event photography"
+                loading="lazy"
+              />
+            </figure>
+            <div class="service-copy md:order-1">
+              <p class="eyebrow mb-3 text-gold">Service four</p>
+              <h3 class="font-display text-4xl font-light">Corporate + Events</h3>
+              <p class="mt-6 text-sm leading-relaxed text-muted">
+                Professional headshots, corporate galas, conferences, team events, and brand
+                photography that elevates your company’s visual presence.
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">
+                We understand the unique demands of corporate photography—discretion, efficiency,
+                and polished results under any timeline. Our event photography captures the
+                atmosphere, connections, and energy of your occasion.
+              </p>
+              <div class="mt-8 flex flex-wrap items-center gap-6">
+                <a class="button button-outline" href="#booking">More details</a>
+                <p class="font-display text-2xl font-light text-muted">Starting at $350</p>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section class="section services-section" id="services" aria-labelledby="services-title">
-        <div class="section-heading section-heading-compact">
-          <p class="eyebrow">The studio</p>
-          <h2 id="services-title">Thoughtful from first frame to final collection.</h2>
+      <section class="stats-section border-y border-stone py-20" aria-labelledby="stats-title">
+        <div class="page-shell">
+          <h2 class="visually-hidden" id="stats-title">Studio statistics</h2>
+          <dl class="grid gap-10 text-center sm:grid-cols-3">
+            <div>
+              <dt class="eyebrow text-muted">Happy clients</dt>
+              <dd class="stat-number mt-3 font-display text-6xl font-light">200+</dd>
+            </div>
+            <div>
+              <dt class="eyebrow text-muted">Serving since</dt>
+              <dd class="stat-number mt-3 font-display text-6xl font-light">2016</dd>
+            </div>
+            <div>
+              <dt class="eyebrow text-muted">Satisfaction</dt>
+              <dd class="stat-number mt-3 font-display text-6xl font-light">98%</dd>
+            </div>
+          </dl>
         </div>
-
-        <ol class="service-list">
-          <li>
-            <span class="service-number">01</span>
-            <div>
-              <h3>Portrait sessions</h3>
-              <p>Relaxed, guided sessions for individuals, couples, and families.</p>
-            </div>
-          </li>
-          <li>
-            <span class="service-number">02</span>
-            <div>
-              <h3>Celebrations</h3>
-              <p>Attentive documentary coverage for the people and moments at the centre.</p>
-            </div>
-          </li>
-          <li>
-            <span class="service-number">03</span>
-            <div>
-              <h3>Brand stories</h3>
-              <p>Editorial imagery with a clear point of view for people and small businesses.</p>
-            </div>
-          </li>
-        </ol>
       </section>
 
-      <section class="section about-section" id="about" aria-labelledby="about-title">
-        <p class="eyebrow">Approach</p>
-        <div class="about-layout">
-          <h2 id="about-title">Present over perfect.</h2>
-          <div class="about-copy">
-            <p>
-              The most memorable photographs rarely feel manufactured. The studio approach is calm,
-              observant, and gently directed—making room for genuine expression.
-            </p>
-            <p class="about-copy-continuation">
-              Every assignment begins with listening. The result is a considered collection that
-              feels like the people and story in front of the lens.
-            </p>
+      <section
+        class="section portfolio-section py-24 md:py-32"
+        id="portfolio"
+        aria-labelledby="portfolio-title"
+      >
+        <div class="page-shell">
+          <div class="section-heading mb-12">
+            <p class="eyebrow mb-4 text-gold">My work</p>
+            <div class="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+              <h2 class="section-title font-display font-light leading-tight" id="portfolio-title">
+                The <em>portfolio</em>
+              </h2>
+              <div
+                class="gallery-filters flex flex-wrap gap-x-6 gap-y-3"
+                role="group"
+                aria-label="Filter portfolio"
+              >
+                <button class="gallery-filter" type="button" data-filter="all" aria-pressed="true">
+                  All
+                </button>
+                <button
+                  class="gallery-filter"
+                  type="button"
+                  data-filter="portrait"
+                  aria-pressed="false"
+                >
+                  Portraits
+                </button>
+                <button
+                  class="gallery-filter"
+                  type="button"
+                  data-filter="wedding"
+                  aria-pressed="false"
+                >
+                  Weddings
+                </button>
+                <button
+                  class="gallery-filter"
+                  type="button"
+                  data-filter="event"
+                  aria-pressed="false"
+                >
+                  Events
+                </button>
+                <button
+                  class="gallery-filter"
+                  type="button"
+                  data-filter="newborn"
+                  aria-pressed="false"
+                >
+                  Newborn
+                </button>
+                <button
+                  class="gallery-filter"
+                  type="button"
+                  data-filter="corporate"
+                  aria-pressed="false"
+                >
+                  Corporate
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p class="visually-hidden" id="gallery-status" aria-live="polite"></p>
+          <div
+            class="gallery-masonry"
+            id="gallery"
+            aria-busy="true"
+            aria-describedby="gallery-status"
+          >
+            <p class="gallery-loading">Loading the portfolio…</p>
+          </div>
+
+          <div class="mt-14 text-center">
+            <a class="button button-outline" href="#booking">Enquire about a session</a>
           </div>
         </div>
       </section>
 
-      <section class="contact-section" id="contact" aria-labelledby="contact-title">
-        <p class="eyebrow">Coming soon</p>
-        <h2 id="contact-title">The studio is taking shape.</h2>
-        <p class="contact-copy">
-          Full galleries, availability, location, and verified contact details will be added in the
-          next release.
-        </p>
-        <span class="contact-status">Website preview · No enquiries collected yet</span>
+      <section class="quote-section border-y border-stone py-24" aria-labelledby="quote-title">
+        <div class="page-shell max-w-4xl text-center">
+          <h2 class="visually-hidden" id="quote-title">Photography philosophy</h2>
+          <blockquote>
+            <p class="font-display text-3xl font-light italic leading-relaxed md:text-5xl">
+              “A photograph is a pause button on life—it freezes beauty before it fades into
+              memory.”
+            </p>
+            <footer class="mt-8">
+              <cite class="eyebrow not-italic text-muted">
+                AbdulSameerStudio · Ottawa Photographer
+              </cite>
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
+      <section
+        class="section about-section py-24 md:py-32"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <div class="page-shell grid items-center gap-16 md:grid-cols-2 md:gap-24">
+          <figure class="about-media overflow-hidden">
+            <img
+              class="h-full w-full object-cover"
+              src="/src/assets/photos/featured/about.webp"
+              srcset="
+                /src/assets/photos/featured/about-720.webp  720w,
+                /src/assets/photos/featured/about.webp     1200w
+              "
+              sizes="(min-width: 768px) 45vw, calc(100vw - 3rem)"
+              width="1200"
+              height="1472"
+              alt="Abdul Sameer, Ottawa photographer"
+              loading="lazy"
+            />
+          </figure>
+          <div>
+            <p class="eyebrow mb-4 text-gold">About me</p>
+            <h2 class="section-title font-display font-light leading-tight" id="about-title">
+              Telling stories <em>through light</em>
+            </h2>
+            <p class="mt-7 text-sm leading-relaxed text-muted">
+              Based in Ottawa, Ontario, I’ve been turning fleeting moments into timeless heirlooms
+              since 2016. Photography is not just my profession—it’s my way of seeing the world.
+            </p>
+            <p class="mt-4 text-sm leading-relaxed text-muted">
+              Whether I’m documenting the quiet tenderness of a newborn’s first hours, the unbridled
+              joy of a wedding celebration, or the polished confidence of an executive
+              headshot—every session is a collaboration, a story told through light, emotion, and
+              artistry.
+            </p>
+            <ul class="about-specialties mt-8 grid grid-cols-2 gap-4 text-sm text-muted">
+              <li>Portrait &amp; Family</li>
+              <li>Wedding Coverage</li>
+              <li>Newborn Sessions</li>
+              <li>Corporate Events</li>
+            </ul>
+            <a class="button button-solid mt-10" href="#booking">Work with me</a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section testimonials-section border-y border-stone py-24 md:py-32"
+        id="testimonials"
+        aria-labelledby="testimonials-title"
+      >
+        <div class="page-shell">
+          <div class="section-heading mb-14">
+            <p class="eyebrow mb-4 text-gold">Kind words</p>
+            <h2 class="section-title font-display font-light leading-tight" id="testimonials-title">
+              Client <em>testimonials</em>
+            </h2>
+          </div>
+
+          <div class="testimonial-grid grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <figure class="testimonial-card">
+              <div class="testimonial-stars">
+                <span class="visually-hidden">5 out of 5 stars</span>
+                <span aria-hidden="true">★★★★★</span>
+              </div>
+              <blockquote>
+                <p>
+                  “Our wedding photos are absolutely breathtaking. Every emotion was captured
+                  perfectly—we still look through the gallery and cry happy tears. Best investment
+                  of our wedding!”
+                </p>
+              </blockquote>
+              <figcaption>
+                <span>Sarah &amp; James</span>
+                <span>Wedding session</span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial-card">
+              <div class="testimonial-stars">
+                <span class="visually-hidden">5 out of 5 stars</span>
+                <span aria-hidden="true">★★★★★</span>
+              </div>
+              <blockquote>
+                <p>
+                  “The newborn session was so gentle and relaxed. Our little one slept the whole
+                  time and the photos are just stunning. We’ll treasure these forever.”
+                </p>
+              </blockquote>
+              <figcaption>
+                <span>Michelle T.</span>
+                <span>Newborn session</span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial-card">
+              <div class="testimonial-stars">
+                <span class="visually-hidden">5 out of 5 stars</span>
+                <span aria-hidden="true">★★★★★</span>
+              </div>
+              <blockquote>
+                <p>
+                  “Professional, efficient, and incredibly talented. My new headshots have already
+                  received so many compliments. Will be booking for our entire team.”
+                </p>
+              </blockquote>
+              <figcaption>
+                <span>Dr. Patricia Chen</span>
+                <span>Corporate session</span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial-card">
+              <div class="testimonial-stars">
+                <span class="visually-hidden">5 out of 5 stars</span>
+                <span aria-hidden="true">★★★★★</span>
+              </div>
+              <blockquote>
+                <p>
+                  “We were nervous with young kids but everything was so comfortable and fun. The
+                  kids actually enjoyed it! The results are magazine-quality.”
+                </p>
+              </blockquote>
+              <figcaption>
+                <span>The Okafor Family</span>
+                <span>Portrait session</span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial-card">
+              <div class="testimonial-stars">
+                <span class="visually-hidden">5 out of 5 stars</span>
+                <span aria-hidden="true">★★★★★</span>
+              </div>
+              <blockquote>
+                <p>
+                  “Covered our annual fundraiser and the photos were delivered so quickly. The
+                  quality was exceptional and really captured the atmosphere.”
+                </p>
+              </blockquote>
+              <figcaption>
+                <span>Marketplace Ottawa</span>
+                <span>Event session</span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial-card">
+              <div class="testimonial-stars">
+                <span class="visually-hidden">5 out of 5 stars</span>
+                <span aria-hidden="true">★★★★★</span>
+              </div>
+              <blockquote>
+                <p>
+                  “I’ve never felt comfortable in front of a camera but this experience changed
+                  everything. The patience and direction made me feel like a model. Incredible
+                  photos!”
+                </p>
+              </blockquote>
+              <figcaption>
+                <span>Amélie B.</span>
+                <span>Portrait session</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section booking-section relative overflow-hidden py-24 md:py-32"
+        id="booking"
+        aria-labelledby="booking-title"
+      >
+        <div class="page-shell grid items-start gap-16 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <p class="eyebrow mb-4 text-gold">Let’s create together</p>
+            <h2 class="section-title font-display font-light leading-tight" id="booking-title">
+              Book your <em>session</em>
+            </h2>
+            <p class="mt-7 max-w-2xl text-sm leading-relaxed text-muted">
+              Get in touch to discuss your vision, ask questions, and check availability. I’ll
+              respond within 48 hours and help shape a session that feels like you.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-3">
+              <a
+                class="button button-solid"
+                href="mailto:abdulsameerstudio@gmail.com?subject=Photography%20session%20inquiry"
+              >
+                Email the studio
+              </a>
+              <a class="button button-outline" href="tel:+13432548524">Call&nbsp;or&nbsp;text</a>
+            </div>
+          </div>
+
+          <address class="contact-card not-italic">
+            <p class="eyebrow mb-6 text-gold">Contact</p>
+            <dl class="contact-list">
+              <div>
+                <dt>Location</dt>
+                <dd>Ottawa, Ontario, Canada</dd>
+              </div>
+              <div>
+                <dt>Email</dt>
+                <dd>
+                  <a href="mailto:abdulsameerstudio@gmail.com"> abdulsameerstudio@gmail.com </a>
+                </dd>
+              </div>
+              <div>
+                <dt>Phone</dt>
+                <dd><a href="tel:+13432548524">(343)&nbsp;254&#8209;8524</a></dd>
+              </div>
+              <div>
+                <dt>Availability</dt>
+                <dd>Serving all of Ontario &amp; beyond</dd>
+              </div>
+            </dl>
+          </address>
+        </div>
+      </section>
+
+      <section
+        class="location-section border-t border-stone py-20"
+        id="contact"
+        aria-labelledby="location-title"
+      >
+        <div class="page-shell grid gap-6 md:grid-cols-[0.7fr_1.3fr] md:items-start">
+          <div>
+            <p class="eyebrow mb-4 text-gold">Based in</p>
+            <h2 class="font-display text-4xl font-light md:text-5xl" id="location-title">
+              Ottawa, <em>Ontario</em>
+            </h2>
+          </div>
+          <div>
+            <p class="text-sm leading-relaxed text-muted">
+              Based in Ottawa and available across Ontario and beyond for destination weddings and
+              sessions. Travel fees may apply outside the Ottawa region.
+            </p>
+            <p class="mt-4 text-sm text-muted">
+              Serving Ottawa · Gatineau · Kanata · Orléans · Nepean · All of Ontario
+            </p>
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <a class="wordmark wordmark-small" href="/" aria-label="Abdul Sameer Studio home">
-        <span class="wordmark-mark" aria-hidden="true">AS</span>
-        <span class="wordmark-text">Abdul Sameer <span>Studio</span></span>
-      </a>
-      <p>© <span data-current-year>2026</span> Abdul Sameer Studio</p>
-      <a href="#main-content">Back to top <span aria-hidden="true">↑</span></a>
+    <footer class="site-footer bg-ink px-6 py-16 text-ivory md:px-12 lg:px-20">
+      <div class="page-shell">
+        <div class="grid gap-12 md:grid-cols-3">
+          <div>
+            <a class="wordmark" href="#hero" aria-label="Abdul Sameer Studio home">
+              <span class="wordmark-text block font-display text-2xl font-light tracking-wide">
+                AbdulSameerStudio
+              </span>
+              <span class="eyebrow block text-gold">Photography · Ottawa</span>
+            </a>
+            <p class="mt-4 max-w-xs text-xs leading-relaxed text-ivory-muted">
+              Capturing life’s most beautiful moments across Ottawa, Ontario, and beyond.
+            </p>
+          </div>
+
+          <nav aria-label="Footer navigation">
+            <p class="eyebrow mb-5 text-gold">Navigate</p>
+            <ul class="space-y-3 text-sm text-ivory-muted">
+              <li><a href="#hero">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#portfolio">Portfolio</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#testimonials">Testimonials</a></li>
+              <li><a href="#booking">Book a session</a></li>
+            </ul>
+          </nav>
+
+          <div>
+            <p class="eyebrow mb-5 text-gold">Contact</p>
+            <address class="space-y-3 text-sm not-italic text-ivory-muted">
+              <p>
+                <a href="mailto:abdulsameerstudio@gmail.com"> abdulsameerstudio@gmail.com </a>
+              </p>
+              <p><a href="tel:+13432548524">(343)&nbsp;254&#8209;8524</a></p>
+              <p>Ottawa, Ontario, Canada</p>
+            </address>
+          </div>
+        </div>
+
+        <div
+          class="mt-12 flex flex-col gap-4 border-t border-ivory-subtle pt-8 text-xs text-ivory-muted sm:flex-row sm:items-center sm:justify-between"
+        >
+          <p>© <span data-current-year>2026</span> AbdulSameerStudio Photography</p>
+          <p>
+            Ottawa, Ontario · Serving all of Canada ·
+            <a href="/THIRD_PARTY_NOTICES.txt">Font notices</a>
+          </p>
+        </div>
+      </div>
     </footer>
+
+    <button class="back-to-top" type="button" aria-label="Back to top" data-back-to-top>
+      <span aria-hidden="true">↑</span>
+    </button>
+
+    <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-title" data-lightbox>
+      <h2 class="visually-hidden" id="lightbox-title">Portfolio photograph viewer</h2>
+      <button
+        class="lightbox-close"
+        type="button"
+        aria-label="Close photograph viewer"
+        data-lightbox-close
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+      <button
+        class="lightbox-previous"
+        type="button"
+        aria-label="Previous photograph"
+        data-lightbox-previous
+      >
+        <span aria-hidden="true">←</span>
+      </button>
+      <figure class="lightbox-figure">
+        <img
+          class="lightbox-image"
+          src="/src/assets/photos/featured/hero.webp"
+          width="2400"
+          height="1600"
+          alt="Selected portfolio photograph"
+          data-lightbox-image
+        />
+        <figcaption class="lightbox-caption" data-lightbox-caption></figcaption>
+      </figure>
+      <button class="lightbox-next" type="button" aria-label="Next photograph" data-lightbox-next>
+        <span aria-hidden="true">→</span>
+      </button>
+    </dialog>
   </body>
 </html>
