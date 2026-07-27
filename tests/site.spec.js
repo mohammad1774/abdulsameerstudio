@@ -115,6 +115,7 @@ test.describe("mobile navigation", () => {
 
     await expect(toggle).toBeVisible();
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(navigation).toBeHidden();
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
     await expect(navigation).toHaveAttribute("data-open", "");

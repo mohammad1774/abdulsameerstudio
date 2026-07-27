@@ -35,10 +35,14 @@ Node.js 24 LTS and npm are required. With `nvm` installed:
 nvm install
 nvm use
 npm ci
+npm exec -- playwright install chromium
 npm run dev
 ```
 
 Vite prints the local URL. Use `Ctrl+C` to stop the server.
+On a fresh Linux workstation, use
+`npm exec -- playwright install --with-deps chromium` if the required browser
+system libraries are not already installed.
 
 | Command                     | Purpose                                                |
 | --------------------------- | ------------------------------------------------------ |
@@ -48,7 +52,7 @@ Vite prints the local URL. Use `Ctrl+C` to stop the server.
 | `npm run format`            | Format supported source files                          |
 | `npm run format:check`      | Verify formatting without changing files               |
 | `npm run lint`              | Run HTML, CSS, and JavaScript static analysis          |
-| `npm test`                  | Run the Playwright browser test suite                  |
+| `npm run test`              | Run the Playwright browser test suite                  |
 | `npm run check`             | Run every quality gate, including the production build |
 | `npm run deploy:cloudflare` | Deploy `dist/` with the pinned Wrangler version        |
 | `npm run verify:deployment` | Smoke-test the production domain                       |
@@ -57,6 +61,7 @@ Before opening a pull request, run:
 
 ```bash
 npm ci
+npm exec -- playwright install chromium
 npm run check
 ```
 
@@ -177,11 +182,13 @@ Pull requests run quality checks but cannot access production secrets or deploy.
 A push to `main` deploys only after the `quality` job succeeds. The production
 job downloads the already-tested `dist/` artifact, deploys it using the
 lockfile-pinned Wrangler CLI, and runs retrying smoke tests against the public
-domain. Production deployments use non-cancelling concurrency.
+domain. Production deployments use non-cancelling concurrency. If either
+required Cloudflare value is missing, the production job fails before it
+downloads or deploys anything.
 
 After the first `quality` check exists, protect `main` with a repository ruleset:
 
-- Require pull requests and the up-to-date `quality` status check.
+- Require pull requests and the up-to-date `Quality` status check.
 - Require conversation resolution and linear history.
 - Block force pushes and branch deletion.
 - Keep required approvals at zero while there is one maintainer.
@@ -190,8 +197,8 @@ For an authorized manual deployment, authenticate Wrangler with its browser
 flow, then build, deploy, and verify:
 
 ```bash
-npx wrangler login
 npm ci
+npm exec -- wrangler login
 npm run check
 npm run deploy:cloudflare
 npm run verify:deployment
@@ -211,14 +218,14 @@ last known-good version and select **Rollback**. Or, from an authenticated local
 checkout, use the pinned Wrangler CLI:
 
 ```bash
-npx wrangler rollback
+npm exec -- wrangler rollback
 ```
 
 With no version ID, Wrangler selects the version before the latest release. To
 choose a known version explicitly:
 
 ```bash
-npx wrangler rollback <VERSION_ID> --message "Restore last known-good release"
+npm exec -- wrangler rollback <VERSION_ID> --message "Restore last known-good release"
 npm run verify:deployment
 ```
 

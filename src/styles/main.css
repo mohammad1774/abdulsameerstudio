@@ -674,10 +674,6 @@ h2 {
     box-shadow: 0 1.25rem 3rem var(--shadow);
     opacity: 0;
     visibility: hidden;
-    transition:
-      transform 180ms ease,
-      opacity 180ms ease,
-      visibility 180ms ease;
     pointer-events: none;
   }
 
@@ -685,6 +681,10 @@ h2 {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
+    transition:
+      transform 180ms ease,
+      opacity 180ms ease,
+      visibility 180ms ease;
     pointer-events: auto;
   }
 
