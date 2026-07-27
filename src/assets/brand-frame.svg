@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 760" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract editorial still life</title>
+  <desc id="desc">Geometric ivory, ochre, and deep red forms arranged like an editorial still life.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#eee5d8"/>
+      <stop offset=".5" stop-color="#cfad7b"/>
+      <stop offset="1" stop-color="#6e362b"/>
+    </linearGradient>
+    <linearGradient id="shadow" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#191512" stop-opacity=".15"/>
+      <stop offset="1" stop-color="#191512" stop-opacity=".76"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="760" fill="url(#background)"/>
+  <circle cx="633" cy="292" r="168" fill="#812f25" opacity=".88"/>
+  <rect x="145" y="128" width="278" height="470" rx="139" fill="#efe6da" opacity=".82"/>
+  <path d="m0 552 456-273 504 333v148H0Z" fill="url(#shadow)"/>
+  <path d="M460 0h500v760H723Z" fill="#1b1613" opacity=".22"/>
+  <circle cx="634" cy="292" r="116" fill="none" stroke="#f5e7d2" stroke-opacity=".4"/>
+  <path d="M55 54h850v652H55Z" fill="none" stroke="#2b1d18" stroke-opacity=".22"/>
+</svg>
