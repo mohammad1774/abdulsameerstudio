@@ -70,10 +70,10 @@ npm run check
 Production deployment needs two Cloudflare values. Store them only in the
 GitHub `production` environment:
 
-| Name                    | GitHub setting       | Value                                                                                     |
-| ----------------------- | -------------------- | ----------------------------------------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`  | Environment secret   | Account-owned token scoped to this account with only **Account > Workers Scripts > Edit** |
-| `CLOUDFLARE_ACCOUNT_ID` | Environment variable | The 32-character ID of the Cloudflare account that owns the zone                          |
+| Name                    | GitHub setting       | Value                                                                                                                                    |
+| ----------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | Environment secret   | Account-owned token with **Account > Workers Scripts > Edit** plus **Zone > Workers Routes > Read** restricted to `abdulsameerstudio.ca` |
+| `CLOUDFLARE_ACCOUNT_ID` | Environment variable | The 32-character ID of the Cloudflare account that owns the zone                                                                         |
 
 `GITHUB_TOKEN` is supplied automatically by GitHub Actions. Do not create a
 GitHub personal access token for the workflow. Do not use a Cloudflare Global
@@ -105,21 +105,27 @@ Creating one requires Cloudflare Super Administrator access.
 
 1. Open **Manage Account > Account API Tokens > Create Token**.
 2. Name it `github-actions-abdulsameerstudio`.
-3. Add only **Account > Workers Scripts > Edit**. Cloudflare's API documentation
+3. Add **Account > Workers Scripts > Edit**. Cloudflare's API documentation
    calls the same permission `Workers Scripts Write`.
-4. Restrict the token to only the account containing `abdulsameerstudio.ca`.
-5. Set an expiry one year from creation and schedule rotation before that date.
-6. Review the summary, create the token, and copy it once.
+4. Add a separate **Zone > Workers Routes > Read** policy for only
+   `abdulsameerstudio.ca`. Wrangler reads the existing routes as a conflict
+   check before attaching the custom domain; write access is not required.
+5. Restrict the account policy to only the account containing
+   `abdulsameerstudio.ca`.
+6. Set an expiry one year from creation and schedule rotation before that date.
+7. Review the summary, create the token, and copy it once.
 
-This single permission covers both static-asset upload and custom-domain
-attachment. Do not add DNS, Workers Routes, KV, R2, Tail, SSL, Rulesets, or
-account-administration access. Cloudflare documents the permission for
-[asset upload](https://developers.cloudflare.com/api/resources/workers/subresources/scripts/subresources/assets/subresources/upload/methods/create/)
+These two permissions cover static-asset upload, Wrangler's read-only route
+check, and custom-domain attachment. Do not add DNS, Workers Routes Write, KV,
+R2, Tail, SSL, Rulesets, or account-administration access. Cloudflare documents
+the permissions for
+[asset upload](https://developers.cloudflare.com/api/resources/workers/subresources/scripts/subresources/assets/subresources/upload/methods/create/),
+[listing routes](https://developers.cloudflare.com/api/resources/workers/subresources/routes/methods/list/),
 and
 [custom-domain attachment](https://developers.cloudflare.com/api/resources/workers/subresources/domains/methods/update/).
 
 If an account-owned token cannot be created, use a user API token with the same
-single permission and account restriction.
+two permissions and account/zone restrictions.
 
 ### 4. Configure the GitHub production environment
 
