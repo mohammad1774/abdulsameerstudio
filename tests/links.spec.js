@@ -20,7 +20,7 @@ for (const pageUnderTest of ["/", "/404.html"]) {
 
       if (url.protocol === "mailto:") {
         expect(url.pathname, `Unexpected email link on "${link.text}"`).toBe(
-          "abdulsameerstudio@gmail.com",
+          "abdulsameerstudios@gmail.com",
         );
         continue;
       }
